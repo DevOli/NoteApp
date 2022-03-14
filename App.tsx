@@ -1,10 +1,25 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import LoginScreen from './src/login/LoginScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const App = () => {
-  return <LoginScreen />;
-};
+import HomeScreen from './src/home/HomeScreen';
+import LoginScreen from './src/login/LoginScreen';
+import NoteScreen from './src/note/NoteScreen';
+
+const Stack = createNativeStackNavigator();
+
+const App = () => (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login">
+        {props => <LoginScreen {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Notes" component={NoteScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
 
 const styles = StyleSheet.create({
   sectionContainer: {
