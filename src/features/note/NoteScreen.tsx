@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import RootStackParamList from 'navigation/types';
 
-type Props = {};
+type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 
-const NoteScreen = (props: Props) => {
+const NoteScreen = (_: Props) => {
   return (
     <View>
       <Text>NoteScreen</Text>
@@ -12,5 +14,3 @@ const NoteScreen = (props: Props) => {
 };
 
 export default NoteScreen;
-
-const styles = StyleSheet.create({});
