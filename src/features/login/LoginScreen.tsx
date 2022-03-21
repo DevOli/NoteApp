@@ -6,6 +6,7 @@ import {AppContext} from 'state/AppContext';
 import {save} from 'storage/secure-store';
 import {tokenStore} from 'utility/constants';
 import Token from 'models/token';
+import {black, white} from 'styles/colors';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -21,10 +22,11 @@ const LoginScreen = (_: Props) => {
   };
 
   return (
-    <View style={styles.centeredButton}>
-      <Text>LoginScreen</Text>
-      <Button title="Login" color="#841584" onPress={onLoging} />
-      <Button title="Sign in" color="#841584" />
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to NotesApp</Text>
+      <View style={styles.centeredButton}>
+        <Button title="Login Local" color="black" onPress={onLoging} />
+      </View>
     </View>
   );
 };
@@ -32,9 +34,25 @@ const LoginScreen = (_: Props) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignContent: 'flex-start',
+    backgroundColor: white,
+  },
   centeredButton: {
     flex: 1,
+    padding: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: white,
+  },
+  text: {
+    color: black,
+    fontSize: 42,
+    marginTop: 50,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: white,
   },
 });

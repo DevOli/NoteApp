@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Text, View} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import {getObject} from 'storage/secure-store';
 import Token from 'models/token';
 import {tokenStore} from 'utility/constants';
 import {AppContext} from 'state/AppContext';
+import {black, white} from 'styles/colors';
 
 type Props = {};
 
@@ -17,8 +18,7 @@ const SplashScreen = (_: Props) => {
     if (token) {
       login();
     }
-
-    setIsLoading(false);
+    setTimeout(() => setIsLoading(false), 4000);
   };
 
   useEffect(() => {
@@ -26,10 +26,41 @@ const SplashScreen = (_: Props) => {
   }, []);
 
   return (
-    <View>
-      <Text>Loading...</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>NotesApp</Text>
+      <Image
+        style={styles.imageStyle}
+        resizeMode={'contain'}
+        source={require('assets/onboarding.png')}
+      />
+      <ActivityIndicator style={styles.activity} size={'large'} color={white} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: black,
+  },
+  imageStyle: {
+    width: '100%',
+    height: undefined,
+    aspectRatio: 1,
+    backgroundColor: black,
+  },
+  activity: {
+    marginBottom: 30,
+  },
+  text: {
+    color: white,
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: black,
+  },
+});
 
 export default SplashScreen;

@@ -8,7 +8,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 const NoteScreen = (_: Props) => {
   return (
     <View>
-      <Text>NoteScreen</Text>
+      <Text>Write your note</Text>
     </View>
   );
 };

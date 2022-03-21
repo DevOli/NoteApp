@@ -10,7 +10,7 @@ const HomeScreen = ({navigation}: Props) => {
   const context = useContext(AppContext);
   return (
     <View>
-      <Text>Home</Text>
+      <Text>My notes</Text>
       <Button title="LogOut" onPress={context.logout} />
       <Button title="Go to Notes" onPress={() => navigation.navigate('Note')} />
     </View>
