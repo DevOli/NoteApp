@@ -8,6 +8,13 @@ import {tokenStore} from 'utility/constants';
 import Token from 'models/token';
 import {black, white} from 'styles/colors';
 
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
+
+GoogleSignin.configure();
+
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const LoginScreen = (_: Props) => {
@@ -21,11 +28,19 @@ const LoginScreen = (_: Props) => {
     context.login();
   };
 
+  const onLogginGoogle = async () => {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    await save(tokenStore, userInfo);
+    context.login();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to NotesApp</Text>
       <View style={styles.centeredButton}>
-        <Button title="Login Local" color="black" onPress={onLoging} />
+        <Button title="Login Locals" color="black" onPress={onLoging} />
+        <GoogleSigninButton onPress={onLogginGoogle} />
       </View>
     </View>
   );

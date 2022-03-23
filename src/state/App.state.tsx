@@ -1,7 +1,6 @@
 import {useState, ProviderProps} from 'react';
 import {cleanAll} from 'storage/secure-store';
 import {AppContextProps} from './AppContext';
-//import {cleanAll} from '~store/secure-store';
 
 export const AppState = (): ProviderProps<AppContextProps> => {
   const [isLoading, setIsLoading] = useState(true);
