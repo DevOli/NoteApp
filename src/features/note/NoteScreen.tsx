@@ -5,10 +5,10 @@ import RootStackParamList from 'navigation/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 
-const NoteScreen = (_: Props) => {
+const NoteScreen = ({route}: Props) => {
   return (
     <View>
-      <Text>Write your note</Text>
+      <Text>Write your note {route.params.id}</Text>
     </View>
   );
 };

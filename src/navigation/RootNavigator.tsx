@@ -1,12 +1,15 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import NoteStackNavigator from './NoteStackNavigator';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const RootNavigator = () => {
   return (
-    <NavigationContainer>
-      <NoteStackNavigator />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <NoteStackNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

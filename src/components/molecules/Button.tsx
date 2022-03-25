@@ -4,19 +4,17 @@ import Label from '../atoms/Label';
 
 type Props = {
   text: string;
-  width: number;
-  height: number;
   fontSize?: number;
   color?: string;
   onPress?: () => void;
-}
+};
 
 export const Button = (props: Props) => {
-  const {text, width, height, fontSize, color, onPress} = props;
+  const {text, fontSize, color, onPress} = props;
 
   return (
     <TouchableHighlight
-      style={[styles.container, {borderColor: color, width, height}]}
+      style={[styles.container, {borderColor: color}]}
       onPress={onPress}>
       <Label
         text={text.toUpperCase()}

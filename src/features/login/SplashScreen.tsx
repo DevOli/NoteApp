@@ -1,5 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+} from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import {getObject} from 'storage/secure-store';
 import Token from 'models/token';
@@ -26,7 +32,7 @@ const SplashScreen = (_: Props) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.text}>NotesApp</Text>
       <Image
         style={styles.imageStyle}
@@ -34,7 +40,7 @@ const SplashScreen = (_: Props) => {
         source={require('assets/onboarding.png')}
       />
       <ActivityIndicator style={styles.activity} size={'large'} color={white} />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RootStackParamList from 'navigation/types';
 import {AppContext} from 'state/AppContext';
 import SplashScreen from 'features/login/SplashScreen';
+import {MenuComponent} from 'features/home/components/Menu';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,7 +22,14 @@ const NoteStackNavigator = () => {
     <Stack.Navigator initialRouteName="Login">
       {context.isAuthenticated ? (
         <>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              title: 'My Notes',
+              headerRight: MenuComponent,
+            }}
+          />
           <Stack.Screen name="Note" component={NoteScreen} />
         </>
       ) : (

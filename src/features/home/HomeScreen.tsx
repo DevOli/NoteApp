@@ -1,20 +1,44 @@
-import {Button, Text, View} from 'react-native';
-import React, {useContext} from 'react';
+import {Button, StyleSheet, View} from 'react-native';
+import React, {useContext, useState} from 'react';
 import RootStackParamList from 'navigation/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppContext} from 'state/AppContext';
+import SearchBar from 'react-native-platform-searchbar';
+import MyNotesList from './components/MyNotesList';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-const HomeScreen = ({navigation}: Props) => {
+const HomeScreen = (_: Props) => {
   const context = useContext(AppContext);
+  const [searchValue, setSearchValue] = useState('');
   return (
-    <View>
-      <Text>My notes</Text>
-      <Button title="LogOut" onPress={context.logout} />
-      <Button title="Go to Notes" onPress={() => navigation.navigate('Note')} />
+    <View style={styles.container}>
+      <SearchBar
+        value={searchValue}
+        onChangeText={setSearchValue}
+        style={styles.searchBar}
+      />
+      <MyNotesList style={styles.scroll} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    //justifyContent: 'space-between',
+  },
+  searchBar: {
+    margin: 20,
+  },
+  text: {
+    fontSize: 24,
+    color: 'black',
+  },
+  scroll: {
+    marginHorizontal: 30,
+    marginBottom: 30,
+  },
+});
 
 export default HomeScreen;
