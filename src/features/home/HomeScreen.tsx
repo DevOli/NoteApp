@@ -1,8 +1,7 @@
-import {Button, StyleSheet, View} from 'react-native';
-import React, {useContext, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
 import RootStackParamList from 'navigation/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {AppContext} from 'state/AppContext';
 import SearchBar from 'react-native-platform-searchbar';
 import MyNotesList from './components/MyNotesList';
 
