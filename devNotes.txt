@@ -1,0 +1,11 @@
+{
+"payload": {
+  "id": 5,
+  "title": "test",
+  "content": "strings content",
+  "image": 2,
+  "category": null
+}
+}
+
+notes/addNote

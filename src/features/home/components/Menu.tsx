@@ -11,7 +11,7 @@ import {
 
 import {AppContext} from 'state/AppContext';
 import {useDispatch} from 'react-redux';
-import {addNote} from 'storage/notes-slice';
+import {addNote, clearNotes} from 'storage/notes-slice';
 
 export const MenuComponent = () => {
   const context = useContext(AppContext);
@@ -23,10 +23,13 @@ export const MenuComponent = () => {
         id: Date.now(),
         title: 'Titulo de nueva nota',
         content: 'Contenido d ficha nueva',
-        image: 1,
         category: null,
       }),
     );
+  };
+
+  const clearNotesHandler = () => {
+    dispatch(clearNotes());
   };
 
   return (
@@ -38,7 +41,7 @@ export const MenuComponent = () => {
         <MenuOptions>
           <MenuOption onSelect={addNewNote} text="New note" />
           <MenuOption onSelect={() => console.log('Save')} text="Favorites" />
-          <MenuOption onSelect={() => console.log('Save')} text="Delete All" />
+          <MenuOption onSelect={clearNotesHandler} text="Delete All" />
           <MenuOption onSelect={context.logout} text="Log out" />
         </MenuOptions>
       </Menu>

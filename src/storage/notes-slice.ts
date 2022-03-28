@@ -14,7 +14,6 @@ const initialState: NoteState = {
       id: 10,
       title: 'Titulo nota default',
       content: 'Contenido de la nota default',
-      image: 1,
       category: null,
     },
   ],
@@ -30,21 +29,23 @@ export const NotesSlide = createSlice({
       state.value.push(action.payload);
     },
     getNotes: (state, action: PayloadAction<Note[]>) => {
-      // state.groups = [];
       state.value.push(...action.payload);
     },
+    clearNotes: state => {
+      state.value = [];
+    },
   },
-  // extraReducers: builder => {
-  //   builder.addCase(getAllGroups.fulfilled, (state, action) => {
-  //     state.groups = [...state.groups, ...action.payload];
-  //   });
-  //   builder.addCase(getAllGroups.rejected, state => {
-  //     console.error('Error');
-  //   });
-  // },
+  extraReducers: builder => {
+    builder.addCase(getAllNotes.fulfilled, (state, action) => {
+      state.value = [...state.value, ...action.payload];
+    });
+    builder.addCase(getAllNotes.rejected, () => {
+      console.error('Errors');
+    });
+  },
 });
 
 export default NotesSlide.reducer;
 
-export const {addNote, getNotes} = NotesSlide.actions;
+export const {addNote, getNotes, clearNotes} = NotesSlide.actions;
 export const selectAllNotes = (state: RootState) => state.notes.value;

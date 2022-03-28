@@ -1,10 +1,8 @@
 import {View, StyleSheet, Platform, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Label from '../atoms/Label';
-import ImageAtom from '../atoms/ImageAtom';
 
 type CardProps = {
-  image: number;
   title: string;
   cardDescription: string;
   cardStyles?: object;
@@ -13,7 +11,7 @@ type CardProps = {
 };
 
 export default function Card(props: CardProps) {
-  const {image, title, cardDescription, cardStyles, onPress} = props;
+  const {title, cardDescription, cardStyles, onPress} = props;
 
   const accesibilities = {
     accessible: true,
@@ -21,15 +19,15 @@ export default function Card(props: CardProps) {
     accessibilityHint: 'Card',
   };
 
-  const cardImage = {
-    image: image,
-    imageDescription: 'image',
-    imageStyle: {
-      height: 100,
-      borderTopLeftRadius: 8,
-      borderTopRightRadius: 8,
-    },
-  };
+  // const cardImage = {
+  //   image: image,
+  //   imageDescription: 'image',
+  //   imageStyle: {
+  //     height: 100,
+  //     borderTopLeftRadius: 8,
+  //     borderTopRightRadius: 8,
+  //   },
+  // };
 
   const titleStyles = {
     fontSize: 18,

@@ -5,10 +5,9 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 
 import Card from 'components/molecules/Card';
-import {GetAllNotes} from 'services/notes-service';
 import RootStackParamList from 'navigation/types';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectAllNotes, getNotes} from 'storage/notes-slice';
+import {selectAllNotes, getAllNotes} from 'storage/notes-slice';
 
 type Props = {
   style: object;
@@ -19,8 +18,7 @@ const MyNotesList = (props: Props) => {
   const dispatch = useDispatch();
 
   const loadNotes = async () => {
-    const allNotes = await GetAllNotes();
-    dispatch(getNotes(allNotes));
+    dispatch(getAllNotes());
   };
 
   useEffect(() => {
@@ -35,7 +33,6 @@ const MyNotesList = (props: Props) => {
       {notes.map((note, index) => (
         <Card
           key={index}
-          image={require('assets/react-logo.png')}
           title={note.title}
           cardDescription={note.content}
           cardStyles={styles.card}
