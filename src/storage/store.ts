@@ -1,8 +1,9 @@
-import {applyMiddleware, createStore} from 'redux';
+import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import notes from './notes-slice';
 
-const middlewares = [
-  /* other middlewares */
-];
+const middlewares = getDefaultMiddleware({
+  immutableCheck: false,
+});
 
 if (__DEV__) {
   const createDebugger = require('redux-flipper').default;
@@ -20,6 +21,13 @@ function counterReducer(state = {value: 0}, action: any) {
   }
 }
 
-let store = createStore(counterReducer, applyMiddleware(...middlewares));
+let store = configureStore({
+  reducer: {
+    counterReducer,
+    notes,
+  },
+  middleware: middlewares,
+});
 
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

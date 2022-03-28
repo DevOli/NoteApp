@@ -340,6 +340,8 @@ PODS:
     - RCTTypeSafety
     - React
     - ReactCommon/turbomodule/core
+  - react-native-webview (11.17.2):
+    - React-Core
   - React-perflogger (0.67.3)
   - React-RCTActionSheet (0.67.3):
     - React-Core/RCTActionSheetHeaders (= 0.67.3)
@@ -472,6 +474,7 @@ DEPENDENCIES:
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -562,6 +565,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-flipper"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -647,6 +652,7 @@ SPEC CHECKSUMS:
   react-native-encrypted-storage: e78d848ce0fb663c2ce306e37921d026809322e6
   react-native-flipper: cfc4ad1de608a27b9dd9f544b820cb1e1897aceb
   react-native-safe-area-context: 114e9a74df2643012b9d6cc1460b94f3b6a90780
+  react-native-webview: 380c1a03ec94b7ed764dac8db1e7c9952d08c93a
   React-perflogger: 93d3f142d6d9a46e635f09ba0518027215a41098
   React-RCTActionSheet: 87327c3722203cc79cf79d02fb83e7332aeedd18
   React-RCTAnimation: 009c87c018d50e0b38692699405ebe631ff4872d

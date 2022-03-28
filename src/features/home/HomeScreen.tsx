@@ -9,7 +9,6 @@ import MyNotesList from './components/MyNotesList';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const HomeScreen = (_: Props) => {
-  const context = useContext(AppContext);
   const [searchValue, setSearchValue] = useState('');
   return (
     <View style={styles.container}>
@@ -26,7 +25,6 @@ const HomeScreen = (_: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'space-between',
   },
   searchBar: {
     margin: 20,

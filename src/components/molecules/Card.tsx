@@ -49,7 +49,7 @@ export default function Card(props: CardProps) {
       style={[styles.container, cardStyles]}
       onPress={onPress}
       {...accesibilities}>
-      <ImageAtom {...cardImage} />
+      {/* <ImageAtom {...cardImage} /> */}
       <View style={styles.cardBody}>
         <View style={styles.title}>
           <Label textStyle={titleStyles} text={title} />
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
   cardBody: {
     width: '100%',
     backgroundColor: '#fff',
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderRadius: 8,
+    // borderBottomLeftRadius: 8,
+    // borderBottomRightRadius: 8,
   },
   title: {
     paddingHorizontal: 20,
@@ -102,9 +103,6 @@ const styles = StyleSheet.create({
   },
   description: {
     paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  image: {
-    height: 220,
+    paddingBottom: 10,
   },
 });

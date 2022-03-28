@@ -1,6 +1,6 @@
 import Note from 'models/note';
 
-export const GetAllGroups = (): Promise<Note[]> => {
+export const GetAllNotes = (): Promise<Note[]> => {
   const notes: Note[] = [
     {
       id: 1,

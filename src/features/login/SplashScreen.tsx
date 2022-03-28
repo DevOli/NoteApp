@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ActivityIndicator,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import React, {useContext, useEffect} from 'react';
 import {getObject} from 'storage/secure-store';
 import Token from 'models/token';
