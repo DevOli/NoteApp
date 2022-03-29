@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import Card from 'components/molecules/Card';
 import RootStackParamList from 'navigation/types';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectAllNotes, getAllNotes} from 'storage/notes-slice';
+import {selectAllNotes, getNotes} from 'storage/notes-slice';
 
 type Props = {
   style: object;
@@ -18,7 +18,7 @@ const MyNotesList = (props: Props) => {
   const dispatch = useDispatch();
 
   const loadNotes = async () => {
-    dispatch(getAllNotes());
+    dispatch(getNotes());
   };
 
   useEffect(() => {

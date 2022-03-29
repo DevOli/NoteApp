@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useContext} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import RootStackParamList from 'navigation/types';
@@ -7,6 +7,7 @@ import {save} from 'storage/secure-store';
 import {tokenStore} from 'utility/constants';
 import Token from 'models/token';
 import {black, white} from 'styles/colors';
+import {findUserByEmail} from 'services';
 
 import {
   GoogleSignin,
@@ -19,27 +20,52 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const LoginScreen = (_: Props) => {
   const context = useContext(AppContext);
+  const [inputEmail, onChangeInputEmail] = React.useState('');
+  const [showError, onError] = React.useState(false);
 
   const onLoging = async () => {
-    const userInfo: Token = {
-      name: 'Oliver',
-    };
-    await save(tokenStore, userInfo);
-    context.login();
+    const user = await findUserByEmail(inputEmail.toLowerCase());
+    if (user) {
+      const userInfo: Token = {
+        name: user.name,
+      };
+      await save(tokenStore, userInfo);
+      context.login();
+    } else {
+      onError(true);
+    }
   };
 
   const onLogginGoogle = async () => {
     await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    await save(tokenStore, userInfo);
-    context.login();
+    const credentials = await GoogleSignin.signIn();
+    onChangeInputEmail(credentials.user.email);
+    const user = await findUserByEmail(credentials.user.email.toLowerCase());
+    if (user) {
+      const userInfo: Token = {
+        name: user.name,
+      };
+      await save(tokenStore, userInfo);
+      context.login();
+    } else {
+      onError(true);
+    }
   };
+
+  const display = showError ? 'flex' : 'none';
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to NotesApp</Text>
       <View style={styles.centeredButton}>
-        <Button title="Login Locals" color="black" onPress={onLoging} />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeInputEmail}
+          value={inputEmail}
+          placeholder="Enter your email"
+        />
+        <Text style={[styles.errorText, {display}]}>Wrong email</Text>
+        <Button title="Login" color="black" onPress={onLoging} />
         <GoogleSigninButton onPress={onLogginGoogle} />
       </View>
     </View>
@@ -69,5 +95,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: white,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 12,
+  },
+  input: {
+    width: '50%',
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
   },
 });
