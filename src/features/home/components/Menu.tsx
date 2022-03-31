@@ -20,10 +20,9 @@ export const MenuComponent = () => {
   const addNewNote = () => {
     dispatch(
       addNote({
-        id: Date.now(),
+        id: Date.now().toString(),
         title: 'Titulo de nueva nota',
         content: 'Contenido d ficha nueva',
-        category: null,
       }),
     );
   };

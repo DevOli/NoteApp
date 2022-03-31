@@ -5,13 +5,14 @@ import Label from '../atoms/Label';
 type CardProps = {
   title: string;
   cardDescription: string;
+  color?: string;
   cardStyles?: object;
   padding?: number;
   onPress: () => void;
 };
 
 export default function Card(props: CardProps) {
-  const {title, cardDescription, cardStyles, onPress} = props;
+  const {title, cardDescription, color, cardStyles, onPress} = props;
 
   const accesibilities = {
     accessible: true,
@@ -42,6 +43,7 @@ export default function Card(props: CardProps) {
     margin: 0,
   };
 
+  const display = color != null ? 'flex' : 'none';
   return (
     <TouchableOpacity
       style={[styles.container, cardStyles]}
@@ -50,6 +52,9 @@ export default function Card(props: CardProps) {
       {/* <ImageAtom {...cardImage} /> */}
       <View style={styles.cardBody}>
         <View style={styles.title}>
+          <View
+            style={[styles.category, {display}, {backgroundColor: color}]}
+          />
           <Label textStyle={titleStyles} text={title} />
         </View>
         <View style={styles.description}>
@@ -102,5 +107,15 @@ const styles = StyleSheet.create({
   description: {
     paddingHorizontal: 20,
     paddingBottom: 10,
+  },
+  category: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    borderBottomStartRadius: 10,
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

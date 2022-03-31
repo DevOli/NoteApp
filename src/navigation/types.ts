@@ -2,7 +2,7 @@ type RootStackParamList = {
   Home: undefined;
   Login: undefined;
   Note: {
-    id: number;
+    id: string;
   };
 };
 

@@ -1,8 +1,12 @@
 import Category from './category';
+import User from './user';
 
 export default interface Note {
-  id: number;
+  id: string;
   title: string;
   content: string;
-  category: Category | null;
+  category?: Category;
+  categoryId?: string;
+  user?: User;
+  userId?: string;
 }

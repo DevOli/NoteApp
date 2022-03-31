@@ -52,8 +52,8 @@ export const NotesSlide = createSlice({
     //   state.value = [...state.value, ...action.payload];
     // });
     builder.addCase(getNotes.fulfilled, notesAdapter.setAll);
-    builder.addCase(getNotes.rejected, () => {
-      console.error('Errors');
+    builder.addCase(getNotes.rejected, error => {
+      console.error(error);
     });
   },
 });

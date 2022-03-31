@@ -1,22 +1,30 @@
 import firestore from '@react-native-firebase/firestore';
 import Note from 'models/note';
+import {findCategoryById} from './category';
 
 const collection = firestore().collection('notes');
 
 export const getAllNotes = async (): Promise<Note[]> => {
-  const querySnapshot = await collection.get();
-  const data = querySnapshot.docs.map(doc => {
-    return {id: doc.id, ...doc.data()} as unknown as Note;
-  });
-  console.log(data);
-  return data;
+  try {
+    const querySnapshot = await collection.get();
+    const data = Promise.all(
+      querySnapshot.docs.map(async doc => {
+        const single = doc.data() as Note;
+        single.id = doc.id;
+        const extra = await findCategoryById(single.categoryId);
+        single.category = extra;
+        return single;
+      }),
+    );
+    return data;
+  } catch (error) {
+    console.error('Something wrong happened in getAllNotes');
+    throw new Error();
+  }
 };
 
-export const findNoteById = async (email: string): Promise<Note | null> => {
-  const querySnapshot = await collection
-    .where('email', '==', email)
-    .limit(1)
-    .get();
-  const data = querySnapshot.docs[0].data() as Note;
+export const findNoteById = async (id: string): Promise<Note | null> => {
+  const documentSnapshot = await collection.doc(id).get();
+  const data = documentSnapshot.data() as Note;
   return data || null;
 };
