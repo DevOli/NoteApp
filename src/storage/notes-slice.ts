@@ -42,6 +42,10 @@ export const NotesSlide = createSlice({
     // getNotes: (state, action: PayloadAction<Note[]>) => {
     //   state.value.push(...action.payload);
     // },
+    addNotes: (state, action: PayloadAction<Note[]>) => {
+      // myGroupsAdapter.removeAll();
+      notesAdapter.setAll(state, action.payload);
+    },
     clearNotes: state => {
       //state.value = [];
       notesAdapter.removeAll(state);
@@ -60,8 +64,7 @@ export const NotesSlide = createSlice({
 
 export default NotesSlide.reducer;
 
-export const {addNote, clearNotes} = NotesSlide.actions;
+export const {addNote, clearNotes, addNotes} = NotesSlide.actions;
 // export const selectAllNotes = (state: RootState) => state.notes.value;
-export const selectAllNotes = notesAdapter.getSelectors<RootState>(
-  state => state.notes,
-).selectAll;
+export const {selectAll: selectAllNotes, selectById: selectNoteById} =
+  notesAdapter.getSelectors<RootState>(state => state.notes);

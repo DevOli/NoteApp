@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 import Category from './category';
 import User from './user';
 

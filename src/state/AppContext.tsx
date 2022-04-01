@@ -1,11 +1,13 @@
+import User from 'models/user';
 import {createContext} from 'react';
 
 export type AppContextProps = {
   isLoading: boolean;
   isAuthenticated?: undefined | boolean;
-  login: () => void;
+  login: (user: User) => void;
   logout: () => void;
   setIsLoading: (loading: boolean) => void;
+  user: User | null;
 };
 
 export const AppContext = createContext<AppContextProps>({
@@ -14,4 +16,5 @@ export const AppContext = createContext<AppContextProps>({
   login: () => {},
   logout: () => {},
   setIsLoading: () => {},
+  user: null,
 });

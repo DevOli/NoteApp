@@ -7,7 +7,8 @@ import {useNavigation} from '@react-navigation/native';
 import Card from 'components/molecules/Card';
 import RootStackParamList from 'navigation/types';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectAllNotes, getNotes} from 'storage/notes-slice';
+import {selectAllNotes, getNotes, addNotes} from 'storage/notes-slice';
+import {subscribeToNotes} from 'services';
 
 type Props = {
   style: object;
@@ -17,12 +18,17 @@ const MyNotesList = (props: Props) => {
   const notes = useSelector(selectAllNotes);
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const loadNotes = async () => {
     dispatch(getNotes());
   };
 
   useEffect(() => {
-    loadNotes();
+    //loadNotes();
+    const subcriber = subscribeToNotes(notesData => {
+      dispatch(addNotes(notesData));
+    });
+    return () => subcriber();
   }, []);
 
   const navigation =

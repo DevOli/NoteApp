@@ -3,10 +3,10 @@ import {ActivityIndicator, Image, StyleSheet, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import React, {useContext, useEffect} from 'react';
 import {getObject} from 'storage/secure-store';
-import Token from 'models/token';
 import {tokenStore} from 'utility/constants';
 import {AppContext} from 'state/AppContext';
 import {black, white} from 'styles/colors';
+import User from 'models/user';
 
 type Props = {};
 
@@ -14,10 +14,10 @@ const SplashScreen = (_: Props) => {
   const {login, setIsLoading} = useContext(AppContext);
 
   const loadComponent = async () => {
-    const token = await getObject<Token>(tokenStore);
+    const user = await getObject<User>(tokenStore);
 
-    if (token) {
-      login();
+    if (user) {
+      login(user);
     }
     setTimeout(() => setIsLoading(false), 4000);
   };

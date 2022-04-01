@@ -4,8 +4,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import RootStackParamList from 'navigation/types';
 import {AppContext} from 'state/AppContext';
 import {save} from 'storage/secure-store';
-import {tokenStore} from 'utility/constants';
-import Token from 'models/token';
+import {tokenStore, userStore} from 'utility/constants';
 import {black, white} from 'styles/colors';
 import {findUserByEmail} from 'services';
 
@@ -26,11 +25,8 @@ const LoginScreen = (_: Props) => {
   const onLoging = async () => {
     const user = await findUserByEmail(inputEmail.toLowerCase());
     if (user) {
-      const userInfo: Token = {
-        name: user.name,
-      };
-      await save(tokenStore, userInfo);
-      context.login();
+      await save(tokenStore, user);
+      context.login(user);
     } else {
       onError(true);
     }
@@ -42,11 +38,8 @@ const LoginScreen = (_: Props) => {
     onChangeInputEmail(credentials.user.email);
     const user = await findUserByEmail(credentials.user.email.toLowerCase());
     if (user) {
-      const userInfo: Token = {
-        name: user.name,
-      };
-      await save(tokenStore, userInfo);
-      context.login();
+      await save(userStore, user);
+      context.login(user);
     } else {
       onError(true);
     }
