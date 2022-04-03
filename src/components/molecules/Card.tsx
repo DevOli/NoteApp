@@ -2,6 +2,8 @@ import {View, StyleSheet, Platform, TouchableOpacity, Text} from 'react-native';
 import React from 'react';
 import Label from '../atoms/Label';
 import Category from 'models/category';
+// @ts-ignore
+import HtmlText from 'react-native-htmltext2';
 
 type CardProps = {
   title: string;
@@ -38,11 +40,11 @@ export default function Card(props: CardProps) {
     margin: 0,
   };
 
-  const subtitleDescStyles = {
-    fontSize: 16,
-    color: 'black',
-    margin: 0,
-  };
+  // const subtitleDescStyles = {
+  //   fontSize: 16,
+  //   color: 'black',
+  //   margin: 0,
+  // };
 
   const display = category?.color ? 'flex' : 'none';
   return (
@@ -63,7 +65,8 @@ export default function Card(props: CardProps) {
           <Label textStyle={titleStyles} text={title} />
         </View>
         <View style={styles.description}>
-          <Label textStyle={subtitleDescStyles} text={cardDescription} />
+          {/* <Label textStyle={subtitleDescStyles} text={cardDescription} /> */}
+          <HtmlText html={cardDescription} />
         </View>
       </View>
     </TouchableOpacity>

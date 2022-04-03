@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont();
 import {
@@ -38,7 +38,9 @@ export const MenuComponent = () => {
           <Icon name="more-vert" size={25} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={addNewNote} text="New note" />
+          <MenuOption onSelect={addNewNote}>
+            <Text>{'Add new note'}</Text>
+          </MenuOption>
           <MenuOption onSelect={() => console.log('Save')} text="Favorites" />
           <MenuOption onSelect={clearNotesHandler} text="Delete All" />
           <MenuOption onSelect={context.logout} text="Log out" />

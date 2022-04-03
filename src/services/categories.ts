@@ -37,3 +37,14 @@ export const subscribeToCategories = (
 
   return subscription;
 };
+
+export const addCategory = (category: Category) => {
+  collection
+    .add({
+      name: category.name,
+      color: category.color,
+    })
+    .then(() => {
+      console.log('User added!');
+    });
+};

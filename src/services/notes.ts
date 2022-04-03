@@ -52,3 +52,29 @@ export const findNoteById = async (id: string): Promise<Note | null> => {
   const data = documentSnapshot.data() as Note;
   return data || null;
 };
+
+export const addNote = (note: Note) => {
+  collection
+    .add({
+      title: note.title,
+      content: note.content,
+      categoryId: note.categoryId,
+    })
+    .then(() => {
+      console.log('User added!');
+    });
+};
+
+export const updateNote = async (note: Note): Promise<boolean> => {
+  console.log('Oliver: ', note);
+  return collection
+    .doc(`${note.id}`)
+    .set({
+      title: note.title,
+      content: note.content,
+      categoryId: note.categoryId,
+    })
+    .then(() => {
+      return true;
+    });
+};

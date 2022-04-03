@@ -21,6 +21,7 @@
     "react-native": "0.67.3",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-flipper": "^0.140.0",
+    "react-native-html-to-text": "^0.0.5",
     "react-native-pell-rich-editor": "^1.8.8",
     "react-native-platform-searchbar": "^1.2.3",
     "react-native-popup-menu": "^0.15.12",

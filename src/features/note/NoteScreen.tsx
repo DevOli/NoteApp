@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -11,7 +11,7 @@ import {selectNoteById} from 'storage/notes-slice';
 import {RootState} from 'storage/store';
 import {Button} from 'components/molecules/Button';
 import CategorySelector from './components/CategorySelector';
-import {subscribeToCategories} from 'services';
+import {subscribeToCategories, updateNote} from 'services';
 import {addCategories, selectAllCategories} from 'storage/category-slice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
@@ -21,15 +21,25 @@ const NoteScreen = ({navigation, route}: Props) => {
   const note = useSelector((state: RootState) =>
     selectNoteById(state, route.params.id),
   );
-
   const categories = useSelector(selectAllCategories);
-
   const [category, setCategory] = useState(note?.category);
-
   const contentRef = useRef(note?.content);
+  const [title, onChangeTitle] = useState(note?.title);
+
   const handleSave = () => {
-    console.log(contentRef.current);
-    console.log(category);
+    if (note) {
+      const newNote = {
+        ...note,
+        title: title || '',
+        content: contentRef.current || '',
+        categoryId: category?.id,
+      };
+      //delete newNote.category;
+      updateNote(newNote);
+      console.log(newNote);
+      // note.content = 'New content';
+      // console.log(note.content);
+    }
   };
 
   const handleChange = useCallback(html => {
@@ -37,7 +47,7 @@ const NoteScreen = ({navigation, route}: Props) => {
   }, []);
 
   useEffect(() => {
-    navigation.setOptions({title: note?.title});
+    navigation.setOptions({title: title});
     const subcriber = subscribeToCategories(data => {
       dispatch(addCategories(data));
     });
@@ -46,6 +56,11 @@ const NoteScreen = ({navigation, route}: Props) => {
 
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeTitle}
+        value={title}
+      />
       <TextEditor content={note?.content} handleChange={handleChange} />
       <CategorySelector
         categories={categories}
@@ -61,6 +76,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  input: {
+    fontSize: 20,
+    height: 30,
+    margin: 12,
   },
 });
 
