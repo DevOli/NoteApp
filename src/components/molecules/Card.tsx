@@ -1,18 +1,19 @@
-import {View, StyleSheet, Platform, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Platform, TouchableOpacity, Text} from 'react-native';
 import React from 'react';
 import Label from '../atoms/Label';
+import Category from 'models/category';
 
 type CardProps = {
   title: string;
   cardDescription: string;
-  color?: string;
+  category?: Category;
   cardStyles?: object;
   padding?: number;
   onPress: () => void;
 };
 
 export default function Card(props: CardProps) {
-  const {title, cardDescription, color, cardStyles, onPress} = props;
+  const {title, cardDescription, category, cardStyles, onPress} = props;
 
   const accesibilities = {
     accessible: true,
@@ -43,18 +44,22 @@ export default function Card(props: CardProps) {
     margin: 0,
   };
 
-  const display = color != null ? 'flex' : 'none';
+  const display = category?.color ? 'flex' : 'none';
   return (
     <TouchableOpacity
       style={[styles.container, cardStyles]}
       onPress={onPress}
       {...accesibilities}>
-      {/* <ImageAtom {...cardImage} /> */}
       <View style={styles.cardBody}>
         <View style={styles.title}>
           <View
-            style={[styles.category, {display}, {backgroundColor: color}]}
-          />
+            style={[
+              styles.category,
+              {display},
+              {backgroundColor: category?.color},
+            ]}>
+            <Text style={styles.badge}>{category?.name}</Text>
+          </View>
           <Label textStyle={titleStyles} text={title} />
         </View>
         <View style={styles.description}>
@@ -113,9 +118,13 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     borderBottomStartRadius: 10,
-    width: 24,
     height: 24,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 7,
+  },
+  badge: {
+    color: 'white',
+    fontSize: 16,
   },
 });

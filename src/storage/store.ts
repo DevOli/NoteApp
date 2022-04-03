@@ -1,5 +1,6 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import notes from './notes-slice';
+import categories from './category-slice';
 
 const middlewares = getDefaultMiddleware({
   immutableCheck: false,
@@ -25,6 +26,7 @@ let store = configureStore({
   reducer: {
     counterReducer,
     notes,
+    categories,
   },
   middleware: middlewares,
 });

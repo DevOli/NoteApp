@@ -11,8 +11,10 @@ export const getAllNotes = async (): Promise<Note[]> => {
       querySnapshot.docs.map(async doc => {
         const single = doc.data() as Note;
         single.id = doc.id;
-        const extra = await findCategoryById(single.categoryId);
-        single.category = extra;
+        if (single.categoryId) {
+          const extra = await findCategoryById(single.categoryId);
+          single.category = extra;
+        }
         return single;
       }),
     );
@@ -31,8 +33,10 @@ export const subscribeToNotes = (
       querySnapshot.docs.map(async doc => {
         const single = doc.data() as Note;
         single.id = doc.id;
-        const extra = await findCategoryById(single.categoryId);
-        single.category = extra;
+        if (single.categoryId) {
+          const extra = await findCategoryById(single.categoryId);
+          single.category = extra;
+        }
         return single;
       }),
     );

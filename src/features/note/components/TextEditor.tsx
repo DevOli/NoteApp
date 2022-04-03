@@ -1,6 +1,5 @@
 import React, {useCallback} from 'react';
 import {
-  Text,
   Platform,
   KeyboardAvoidingView,
   ScrollView,
@@ -9,7 +8,12 @@ import {
 } from 'react-native';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
-const TextEditor = () => {
+type Props = {
+  content?: string;
+  handleChange: (html: string) => void;
+};
+
+const TextEditor = ({content, handleChange}: Props) => {
   const onPressAddImage = useCallback(() => {
     // insert URL
     richText.current?.insertImage(
@@ -23,14 +27,12 @@ const TextEditor = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.scroll}>
-        <Text>Description:</Text>
         <RichEditor
           //useContainer={false}
           style={styles.textView}
           ref={richText}
-          onChange={descriptionText => {
-            console.log('descriptionText:', descriptionText);
-          }}
+          onChange={handleChange}
+          initialContentHTML={content}
         />
       </ScrollView>
       <KeyboardAvoidingView

@@ -13,8 +13,27 @@ export const getAllCategories = async (): Promise<Category[]> => {
   return data;
 };
 
-export const findCategoryById = async (id?: string): Promise<Category> => {
+export const findCategoryById = async (id: string): Promise<Category> => {
   const documentSnapshot = await collection.doc(id).get();
   const data = documentSnapshot.data() as Category;
+  data.id = id;
   return data;
+};
+
+export const subscribeToCategories = (
+  handler: (notes: Category[]) => void,
+): (() => void) => {
+  const subscription = collection.onSnapshot(async querySnapshot => {
+    const data = await Promise.all(
+      querySnapshot.docs.map(async doc => {
+        const single = doc.data() as Category;
+        single.id = doc.id;
+        return single;
+      }),
+    );
+
+    handler(data);
+  });
+
+  return subscription;
 };

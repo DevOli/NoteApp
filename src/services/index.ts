@@ -11,3 +11,4 @@ export const subscribeToNotes = Notes.subscribeToNotes;
 
 export const getAllCategories = Categories.getAllCategories;
 export const findCategoryById = Categories.findCategoryById;
+export const subscribeToCategories = Categories.subscribeToCategories;

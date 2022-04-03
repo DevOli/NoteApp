@@ -40,7 +40,7 @@ const MyNotesList = (props: Props) => {
         <Card
           key={index}
           title={note.title}
-          color={note.category?.color}
+          category={note.category}
           cardDescription={note.content}
           cardStyles={styles.card}
           onPress={() => navigation.navigate('Note', {id: note.id})}

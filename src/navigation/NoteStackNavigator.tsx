@@ -30,7 +30,11 @@ const NoteStackNavigator = () => {
               headerRight: MenuComponent,
             }}
           />
-          <Stack.Screen name="Note" component={NoteScreen} />
+          <Stack.Screen
+            name="Note"
+            options={{title: ''}}
+            component={NoteScreen}
+          />
         </>
       ) : (
         <Stack.Screen
