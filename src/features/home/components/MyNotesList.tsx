@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import Card from 'components/molecules/Card';
 import RootStackParamList from 'navigation/types';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectAllNotes, getNotes, addNotes} from 'storage/notes-slice';
+import {getNotes, addNotes, selectFilteredNotes} from 'storage/notes-slice';
 import {subscribeToNotes} from 'services';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const MyNotesList = (props: Props) => {
-  const notes = useSelector(selectAllNotes);
+  const notes = useSelector(selectFilteredNotes);
   const dispatch = useDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

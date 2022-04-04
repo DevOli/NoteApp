@@ -1,4 +1,8 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  AnyAction,
+} from '@reduxjs/toolkit';
 import notes from './notes-slice';
 import categories from './category-slice';
 
@@ -11,12 +15,28 @@ if (__DEV__) {
   middlewares.push(createDebugger());
 }
 
-function counterReducer(state = {value: 0}, action: any) {
+export type FilterState = {
+  value: string;
+};
+
+export interface ActionFilter {
+  type: 'counter/set';
+  filter: string;
+}
+
+export const setFilter = (filter: string): ActionFilter => ({
+  type: 'counter/set',
+  filter: filter,
+});
+
+const initialState: FilterState = {
+  value: '',
+};
+
+function filterReducer(state = initialState, action: AnyAction): FilterState {
   switch (action.type) {
-    case 'counter/incremented':
-      return {value: state.value + 1};
-    case 'counter/decremented':
-      return {value: state.value - 1};
+    case 'counter/set':
+      return {value: action.filter};
     default:
       return state;
   }
@@ -24,7 +44,7 @@ function counterReducer(state = {value: 0}, action: any) {
 
 let store = configureStore({
   reducer: {
-    counterReducer,
+    filterReducer,
     notes,
     categories,
   },

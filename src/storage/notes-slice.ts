@@ -3,6 +3,7 @@ import {
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
 } from '@reduxjs/toolkit';
 
 //import {GetAllNotes} from 'services/notes-service';
@@ -68,3 +69,18 @@ export const {addNote, clearNotes, addNotes} = NotesSlide.actions;
 // export const selectAllNotes = (state: RootState) => state.notes.value;
 export const {selectAll: selectAllNotes, selectById: selectNoteById} =
   notesAdapter.getSelectors<RootState>(state => state.notes);
+
+export const selectFilteredNotes = createSelector(
+  selectAllNotes,
+  (state: RootState) => state.filterReducer,
+  // Output selector: receives both values
+  (notes, filters) => {
+    const {value} = filters;
+    if (!value) {
+      return notes;
+    }
+    return notes.filter(todo =>
+      todo.title.toLowerCase().includes(value.toLowerCase()),
+    );
+  },
+);

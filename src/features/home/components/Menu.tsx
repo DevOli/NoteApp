@@ -38,7 +38,7 @@ export const MenuComponent = () => {
           <Icon name="more-vert" size={25} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={addNewNote}>
+          <MenuOption style={styles.menuItem} onSelect={addNewNote}>
             <Text>{'Add new note'}</Text>
           </MenuOption>
           <MenuOption

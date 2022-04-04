@@ -13,6 +13,8 @@ import Note from 'models/note';
 
 type Props = {
   note?: Note;
+  onClear?: () => void;
+  onDelete?: () => void;
 };
 
 export const MenuComponent = ({note}: Props) => {
@@ -36,11 +38,11 @@ export const MenuComponent = ({note}: Props) => {
           </MenuOption>
           <MenuOption style={styles.menuItem} onSelect={onSharePress}>
             <Text>{'Clear'}</Text>
-            <Icon name="share" size={18} />
+            <Icon name="clear" size={18} />
           </MenuOption>
           <MenuOption style={styles.menuItem} onSelect={onSharePress}>
             <Text>{'Delete'}</Text>
-            <Icon name="share" size={18} />
+            <Icon name="delete" size={18} />
           </MenuOption>
         </MenuOptions>
       </Menu>
