@@ -3,7 +3,7 @@ import React from 'react';
 import Label from '../atoms/Label';
 import Category from 'models/category';
 // @ts-ignore
-import HtmlText from 'react-native-htmltext2';
+import HtmlText from 'react-native-html-to-text';
 
 type CardProps = {
   title: string;

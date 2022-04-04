@@ -22,7 +22,7 @@ export const MenuComponent = () => {
       addNote({
         id: Date.now().toString(),
         title: 'Titulo de nueva nota',
-        content: 'Contenido d ficha nueva',
+        content: '<div>Contenido d ficha nueva<div>',
       }),
     );
   };

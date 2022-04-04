@@ -7,7 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RootStackParamList from 'navigation/types';
 import {AppContext} from 'state/AppContext';
 import SplashScreen from 'features/login/SplashScreen';
-import {MenuComponent} from 'features/home/components/Menu';
+import {MenuComponent as MenuHome} from 'features/home/components/Menu';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -27,7 +27,7 @@ const NoteStackNavigator = () => {
             component={HomeScreen}
             options={{
               title: 'My Notes',
-              headerRight: MenuComponent,
+              headerRight: MenuHome,
             }}
           />
           <Stack.Screen

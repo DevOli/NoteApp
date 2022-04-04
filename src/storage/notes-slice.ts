@@ -10,9 +10,9 @@ import {getAllNotes} from 'services';
 import Note from 'models/note';
 import {RootState} from './store';
 
-export type NoteState = {
-  value: Note[];
-};
+// export type NoteState = {
+//   value: Note[];
+// };
 
 const notesAdapter = createEntityAdapter<Note>({
   selectId: note => note.id,
