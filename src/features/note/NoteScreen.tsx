@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Pressable, StyleSheet, Text, TextInput} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -14,7 +14,6 @@ import CategorySelector from './components/CategorySelector';
 import {subscribeToCategories, updateNote} from 'services';
 import {addCategories, selectAllCategories} from 'storage/category-slice';
 import {MenuComponent as MenuNote} from 'features/note/components/Menu';
-import {CategoryModal} from 'features/category/CategoryModal';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 
@@ -69,9 +68,6 @@ const NoteScreen = ({navigation, route}: Props) => {
         selected={category}
       />
       <Button text={'Save'} onPress={handleSave} />
-      {/* <Pressable onPress={() => setModalVisible(true)}>
-        <Text>Show Modal</Text>
-      </Pressable> */}
     </SafeAreaView>
   );
 };

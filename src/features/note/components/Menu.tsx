@@ -34,6 +34,14 @@ export const MenuComponent = ({note}: Props) => {
             <Text>{'Share'}</Text>
             <Icon name="share" size={18} />
           </MenuOption>
+          <MenuOption style={styles.menuItem} onSelect={onSharePress}>
+            <Text>{'Clear'}</Text>
+            <Icon name="share" size={18} />
+          </MenuOption>
+          <MenuOption style={styles.menuItem} onSelect={onSharePress}>
+            <Text>{'Delete'}</Text>
+            <Icon name="share" size={18} />
+          </MenuOption>
         </MenuOptions>
       </Menu>
     </View>

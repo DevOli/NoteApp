@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
@@ -41,11 +42,25 @@ const TextEditor = ({content, handleChange}: Props) => {
           editor={richText}
           onPressAddImage={onPressAddImage}
           actions={[
+            actions.undo,
+            actions.redo,
+            actions.insertOrderedList,
             actions.insertImage,
             actions.setBold,
             actions.setItalic,
             actions.setUnderline,
+            actions.heading1,
+            actions.heading4,
+            actions.code,
           ]}
+          iconMap={{
+            [actions.heading1]: ({tintColor}) => (
+              <Text style={[styles.tib, {color: tintColor}]}>H1</Text>
+            ),
+            [actions.heading4]: ({tintColor}) => (
+              <Text style={[styles.tib, {color: tintColor}]}>H4</Text>
+            ),
+          }}
         />
       </KeyboardAvoidingView>
     </View>
@@ -61,6 +76,10 @@ const styles = StyleSheet.create({
   },
   textView: {
     flex: 1,
+  },
+  tib: {
+    textAlign: 'center',
+    color: '#515156',
   },
 });
 

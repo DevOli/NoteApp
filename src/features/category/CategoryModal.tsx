@@ -7,6 +7,8 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import {addCategory} from 'services';
+import Category from 'models/category';
 
 type Props = {
   setModalVisible: (data: boolean) => void;
@@ -16,6 +18,17 @@ type Props = {
 export const CategoryModal = ({setModalVisible, modalVisible}: Props) => {
   const [name, onChangeName] = React.useState('');
   const [color, onChangeColor] = React.useState('');
+
+  const handleSave = () => {
+    const newCategory: Category = {
+      id: '',
+      name: name,
+      color: color,
+    };
+    addCategory(newCategory);
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -43,7 +56,7 @@ export const CategoryModal = ({setModalVisible, modalVisible}: Props) => {
           />
           <Pressable
             style={[styles.button, styles.buttonClose]}
-            onPress={() => setModalVisible(!modalVisible)}>
+            onPress={handleSave}>
             <Text style={styles.textStyle}>Save</Text>
           </Pressable>
         </View>

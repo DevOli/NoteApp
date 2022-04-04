@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont();
 import {
@@ -41,11 +41,31 @@ export const MenuComponent = () => {
           <MenuOption onSelect={addNewNote}>
             <Text>{'Add new note'}</Text>
           </MenuOption>
-          <MenuOption onSelect={() => console.log('Save')} text="Favorites" />
-          <MenuOption onSelect={clearNotesHandler} text="Delete All" />
-          <MenuOption onSelect={context.logout} text="Log out" />
+          <MenuOption
+            style={styles.menuItem}
+            onSelect={() => console.log('Save')}
+            text="Favorites"
+          />
+          <MenuOption
+            style={styles.menuItem}
+            onSelect={clearNotesHandler}
+            text="Delete All"
+          />
+          <MenuOption
+            style={styles.menuItem}
+            onSelect={context.logout}
+            text="Log out"
+          />
         </MenuOptions>
       </Menu>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  menuItem: {
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+});

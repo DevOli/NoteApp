@@ -66,7 +66,6 @@ export const addNote = (note: Note) => {
 };
 
 export const updateNote = async (note: Note): Promise<boolean> => {
-  console.log('Oliver: ', note);
   return collection
     .doc(`${note.id}`)
     .set({

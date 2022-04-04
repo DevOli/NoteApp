@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Category from 'models/category';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CategoryModal } from 'features/category/CategoryModal';
+import {CategoryModal} from 'features/category/CategoryModal';
 
 type Props = {
   categories: Category[];
@@ -18,7 +18,7 @@ type Props = {
 
 const CategorySelector = ({categories, onSelect, selected}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
-  
+
   return (
     <>
       <Text style={styles.title}>{'Select Category:'}</Text>

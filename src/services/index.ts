@@ -13,3 +13,4 @@ export const updateNote = Notes.updateNote;
 export const getAllCategories = Categories.getAllCategories;
 export const findCategoryById = Categories.findCategoryById;
 export const subscribeToCategories = Categories.subscribeToCategories;
+export const addCategory = Categories.addCategory;
