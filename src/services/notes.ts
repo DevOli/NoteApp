@@ -77,3 +77,12 @@ export const updateNote = async (note: Note): Promise<boolean> => {
       return true;
     });
 };
+
+export const deleteNote = (noteId: string) => {
+  collection
+    .doc(noteId)
+    .delete()
+    .then(() => {
+      console.log('User deleted!');
+    });
+};

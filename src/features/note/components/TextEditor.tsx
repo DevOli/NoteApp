@@ -12,19 +12,20 @@ import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 type Props = {
   content?: string;
   handleChange: (html: string) => void;
+  clear?: boolean;
 };
 
 const TextEditor = ({content, handleChange}: Props) => {
   const onPressAddImage = useCallback(() => {
-    // insert URL
     richText.current?.insertImage(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/100px-React-icon.svg.png',
       'background: gray;',
     );
-    // insert base64
-    // this.richText.current?.insertImage(`data:${image.mime};base64,${image.data}`);
   }, []);
   const richText = React.useRef<any>();
+
+  richText.current?.setContentHTML(content);
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.scroll}>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {StyleSheet, TextInput} from 'react-native';
+import {Alert, StyleSheet, TextInput} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -14,6 +14,7 @@ import CategorySelector from './components/CategorySelector';
 import {subscribeToCategories, updateNote} from 'services';
 import {addCategories, selectAllCategories} from 'storage/category-slice';
 import {MenuComponent as MenuNote} from 'features/note/components/Menu';
+import {deleteNote} from 'services/notes';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 
@@ -26,6 +27,7 @@ const NoteScreen = ({navigation, route}: Props) => {
   const [category, setCategory] = useState(note?.category);
   const contentRef = useRef(note?.content);
   const [title, onChangeTitle] = useState(note?.title);
+  const [clear, onClear] = useState(false);
 
   const handleSave = () => {
     if (note) {
@@ -35,11 +37,29 @@ const NoteScreen = ({navigation, route}: Props) => {
         content: contentRef.current || '',
         categoryId: category?.id,
       };
-      //delete newNote.category;
-      updateNote(newNote);
+      updateNote(newNote).then(_result =>
+        Alert.alert('Notes', 'The changes have been saved', [
+          {
+            text: 'Ok',
+            style: 'default',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]),
+      );
       // note.content = 'New content';
       // console.log(note.content);
     }
+  };
+
+  const handleDelete = () => {
+    note && deleteNote(note.id) && navigation.goBack();
+  };
+
+  const handleClear = () => {
+    onClear(true);
+    contentRef.current = '';
   };
 
   const handleChange = useCallback(html => {
@@ -47,7 +67,11 @@ const NoteScreen = ({navigation, route}: Props) => {
   }, []);
 
   useEffect(() => {
-    navigation.setOptions({title: title, headerRight: () => MenuNote({note})});
+    navigation.setOptions({
+      title: title,
+      headerRight: () =>
+        MenuNote({note, onClear: handleClear, onDelete: handleDelete}),
+    });
     const subcriber = subscribeToCategories(data => {
       dispatch(addCategories(data));
     });
@@ -61,7 +85,11 @@ const NoteScreen = ({navigation, route}: Props) => {
         onChangeText={onChangeTitle}
         value={title}
       />
-      <TextEditor content={note?.content} handleChange={handleChange} />
+      <TextEditor
+        content={contentRef.current}
+        handleChange={handleChange}
+        clear={clear}
+      />
       <CategorySelector
         categories={categories}
         onSelect={setCategory}

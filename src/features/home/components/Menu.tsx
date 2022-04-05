@@ -41,11 +41,11 @@ export const MenuComponent = () => {
           <MenuOption style={styles.menuItem} onSelect={addNewNote}>
             <Text>{'Add new note'}</Text>
           </MenuOption>
-          <MenuOption
+          {/* <MenuOption
             style={styles.menuItem}
             onSelect={() => console.log('Save')}
             text="Favorites"
-          />
+          /> */}
           <MenuOption
             style={styles.menuItem}
             onSelect={clearNotesHandler}
