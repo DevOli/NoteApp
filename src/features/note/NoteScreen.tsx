@@ -11,10 +11,15 @@ import {selectNoteById} from 'storage/notes-slice';
 import {RootState} from 'storage/store';
 import {Button} from 'components/molecules/Button';
 import CategorySelector from './components/CategorySelector';
-import {subscribeToCategories, updateNote} from 'services';
+import {
+  subscribeToCategories,
+  updateNote,
+  deleteNote,
+  deleteCategory,
+} from 'services';
 import {addCategories, selectAllCategories} from 'storage/category-slice';
 import {MenuComponent as MenuNote} from 'features/note/components/Menu';
-import {deleteNote} from 'services/notes';
+import Category from 'models/category';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Note'>;
 
@@ -35,7 +40,7 @@ const NoteScreen = ({navigation, route}: Props) => {
         ...note,
         title: title || '',
         content: contentRef.current || '',
-        categoryId: category?.id,
+        categoryId: category?.id || '',
       };
       updateNote(newNote).then(_result =>
         Alert.alert('Notes', 'The changes have been saved', [
@@ -55,6 +60,20 @@ const NoteScreen = ({navigation, route}: Props) => {
 
   const handleDelete = () => {
     note && deleteNote(note.id) && navigation.goBack();
+  };
+
+  const handleDeleteCategory = (categoryOld: Category) => {
+    Alert.alert('Category', `Do you want to delete '${categoryOld.name}'?`, [
+      {text: "Don't do it", style: 'cancel', onPress: () => {}},
+      {
+        text: 'Do it',
+        style: 'destructive',
+        onPress: () => {
+          deleteCategory(categoryOld.id);
+          setCategory(undefined);
+        },
+      },
+    ]);
   };
 
   const handleClear = () => {
@@ -94,6 +113,7 @@ const NoteScreen = ({navigation, route}: Props) => {
         categories={categories}
         onSelect={setCategory}
         selected={category}
+        onLongSelect={handleDeleteCategory}
       />
       <Button text={'Save'} onPress={handleSave} />
     </SafeAreaView>

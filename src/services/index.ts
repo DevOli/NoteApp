@@ -9,8 +9,10 @@ export const getAllNotes = Notes.getAllNotes;
 export const findNoteById = Notes.findNoteById;
 export const subscribeToNotes = Notes.subscribeToNotes;
 export const updateNote = Notes.updateNote;
+export const deleteNote = Notes.deleteNote;
 
 export const getAllCategories = Categories.getAllCategories;
 export const findCategoryById = Categories.findCategoryById;
 export const subscribeToCategories = Categories.subscribeToCategories;
 export const addCategory = Categories.addCategory;
+export const deleteCategory = Categories.deleteCategory;

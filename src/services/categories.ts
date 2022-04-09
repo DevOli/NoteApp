@@ -13,11 +13,18 @@ export const getAllCategories = async (): Promise<Category[]> => {
   return data;
 };
 
-export const findCategoryById = async (id: string): Promise<Category> => {
-  const documentSnapshot = await collection.doc(id).get();
-  const data = documentSnapshot.data() as Category;
-  data.id = id;
-  return data;
+export const findCategoryById = async (
+  id: string,
+): Promise<Category | undefined> => {
+  try {
+    const documentSnapshot = await collection.doc(id).get();
+    const data = documentSnapshot.data() as Category;
+    console.log(data);
+    data.id = id;
+    return data;
+  } catch (error) {
+    return undefined;
+  }
 };
 
 export const subscribeToCategories = (
@@ -45,6 +52,15 @@ export const addCategory = (category: Category) => {
       color: category.color,
     })
     .then(() => {
-      console.log('User added!');
+      console.log('Category added!');
+    });
+};
+
+export const deleteCategory = (categoryId: string) => {
+  collection
+    .doc(categoryId)
+    .delete()
+    .then(() => {
+      console.log('Category deleted!');
     });
 };

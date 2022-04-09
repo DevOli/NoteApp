@@ -21,8 +21,8 @@ export const MenuComponent = () => {
     dispatch(
       addNote({
         id: Date.now().toString(),
-        title: 'Titulo de nueva nota',
-        content: '<div>Contenido d ficha nueva<div>',
+        title: 'Titulo',
+        content: '<div>Contenido de ficha nueva<div>',
       }),
     );
   };

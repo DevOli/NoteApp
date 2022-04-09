@@ -14,9 +14,15 @@ type Props = {
   categories: Category[];
   onSelect: (category: Category) => void;
   selected?: Category;
+  onLongSelect: (category: Category) => void;
 };
 
-const CategorySelector = ({categories, onSelect, selected}: Props) => {
+const CategorySelector = ({
+  categories,
+  onSelect,
+  selected,
+  onLongSelect,
+}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -28,6 +34,7 @@ const CategorySelector = ({categories, onSelect, selected}: Props) => {
             <Pressable
               key={category.id}
               onPress={() => onSelect(category)}
+              onLongPress={() => onLongSelect(category)}
               style={[
                 category.id === selected?.id
                   ? styles.categorySelected

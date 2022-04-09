@@ -61,7 +61,7 @@ export const addNote = (note: Note) => {
       categoryId: note.categoryId,
     })
     .then(() => {
-      console.log('User added!');
+      console.log('Notes added!');
     });
 };
 
@@ -79,10 +79,10 @@ export const updateNote = async (note: Note): Promise<boolean> => {
 };
 
 export const deleteNote = (noteId: string) => {
-  collection
+  return collection
     .doc(noteId)
     .delete()
     .then(() => {
-      console.log('User deleted!');
+      return true;
     });
 };

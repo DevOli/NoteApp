@@ -8,6 +8,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+//const {convert} = require('html-to-text');
 
 import Note from 'models/note';
 
@@ -18,6 +19,9 @@ type Props = {
 };
 
 export const MenuComponent = ({note, onClear, onDelete}: Props) => {
+  // const textContent: string = convert(note?.content, {
+  //   wordwrap: 130,
+  // });
   const shareContent = {
     title: note?.title || '',
     message: note?.content || '',
